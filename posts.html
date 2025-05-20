@@ -1,0 +1,64 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts | SocialApp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SocialApp</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="chat.html">Chat</a>
+      <a href="status.html">Status</a>
+      <a href="posts.html" class="active">Posts</a>
+      <div id="userProfile">
+        <img id="userProfilePic" src="assets/default-profile.png" alt="Profile">
+        <span id="userName"></span>
+        <button id="signOutBtn" class="btn">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="posts-container">
+    <section class="create-post">
+      <div class="post-form">
+        <div class="post-input">
+          <img id="currentUserPic" src="assets/default-profile.png" alt="You">
+          <input type="text" placeholder="What's on your mind?" id="postText">
+        </div>
+        <div class="post-actions">
+          <button class="action-btn" id="addPhotoBtn">
+            <i class="fas fa-image"></i> Photo/Video
+          </button>
+          <button class="action-btn" id="addEmojiBtn">
+            <i class="far fa-smile"></i> Feeling
+          </button>
+          <button class="btn" id="postSubmitBtn">Post</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="posts-feed" id="postsContainer">
+      <!-- Posts will be loaded here dynamically -->
+      <div class="empty-feed">
+        <i class="fas fa-newspaper"></i>
+        <p>No posts yet. Be the first to share something!</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/data"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/posts.js"></script>
+</body>
+</html>

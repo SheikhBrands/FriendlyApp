@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | SocialApp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1 id="authTitle">Login to SocialApp</h1>
+        <p id="authSubtitle">Connect with friends and share your moments</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="tab-btn active" id="loginTab">Login</button>
+        <button class="tab-btn" id="registerTab">Register</button>
+      </div>
+
+      <form id="loginForm" class="auth-form active">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn auth-btn">Login</button>
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+        <button type="button" id="googleSignIn" class="btn social-btn">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <div class="auth-footer">
+          <a href="#" id="forgotPassword">Forgot password?</a>
+        </div>
+      </form>
+
+      <form id="registerForm" class="auth-form">
+        <div class="input-group">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" placeholder="Enter your full name" required>
+        </div>
+        <div class="input-group">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="input-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" placeholder="Create a password" required>
+        </div>
+        <div class="input-group">
+          <label for="regConfirmPassword">Confirm Password</label>
+          <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <button type="submit" class="btn auth-btn">Create Account</button>
+        <div class="auth-divider">
+          <span>or</span>
+        </div>
+        <button type="button" id="googleSignUp" class="btn social-btn">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <div class="auth-footer">
+          Already have an account? <a href="#" id="switchToLogin">Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script>
+    // Handle tab switching
+    document.getElementById('registerTab').addEventListener('click', () => {
+      document.getElementById('loginForm').classList.remove('active');
+      document.getElementById('registerForm').classList.add('active');
+      document.getElementById('loginTab').classList.remove('active');
+      document.getElementById('registerTab').classList.add('active');
+      document.getElementById('authTitle').textContent = 'Create an Account';
+      document.getElementById('authSubtitle').textContent = 'Join our community today';
+    });
+
+    document.getElementById('loginTab').addEventListener('click', () => {
+      document.getElementById('registerForm').classList.remove('active');
+      document.getElementById('loginForm').classList.add('active');
+      document.getElementById('registerTab').classList.remove('active');
+      document.getElementById('loginTab').classList.add('active');
+      document.getElementById('authTitle').textContent = 'Login to SocialApp';
+      document.getElementById('authSubtitle').textContent = 'Connect with friends and share your moments';
+    });
+
+    document.getElementById('switchToLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('loginTab').click();
+    });
+
+    // Check URL for register parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('register') === 'true') {
+      document.getElementById('registerTab').click();
+    }
+  </script>
+</body>
+</html>

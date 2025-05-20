@@ -1,0 +1,123 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | SocialApp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SocialApp Admin</div>
+    <nav>
+      <a href="index.html">View Site</a>
+      <div id="userProfile">
+        <img id="userProfilePic" src="assets/default-profile.png" alt="Profile">
+        <span id="userName"></span>
+        <button id="signOutBtn" class="btn">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="admin-container">
+    <aside class="admin-sidebar">
+      <div class="admin-menu">
+        <button class="menu-btn active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+        <button class="menu-btn" data-section="users"><i class="fas fa-users"></i> User Management</button>
+        <button class="menu-btn" data-section="monetization"><i class="fas fa-money-bill-wave"></i> Monetization</button>
+        <button class="menu-btn" data-section="content"><i class="fas fa-photo-video"></i> Content Moderation</button>
+        <button class="menu-btn" data-section="reports"><i class="fas fa-flag"></i> Reports</button>
+      </div>
+    </aside>
+
+    <section class="admin-content">
+      <div id="dashboardSection" class="content-section active">
+        <h2>Admin Dashboard</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Active Today</h3>
+            <p id="activeUsers">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>New Signups</h3>
+            <p id="newUsers">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Pending Monetization</h3>
+            <p id="pendingMonetization">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="usersSection" class="content-section">
+        <h2>User Management</h2>
+        <div class="search-box">
+          <input type="text" id="userSearch" placeholder="Search users...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="table-container">
+          <table id="usersTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Users will be loaded here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="monetizationSection" class="content-section">
+        <h2>Monetization Requests</h2>
+        <div class="table-container">
+          <table id="requestsTable">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Followers</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Requests will be loaded here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="contentSection" class="content-section">
+        <h2>Content Moderation</h2>
+        <div class="content-filters">
+          <button class="filter-btn active" data-type="all">All Content</button>
+          <button class="filter-btn" data-type="reported">Reported</button>
+          <button class="filter-btn" data-type="statuses">Statuses</button>
+          <button class="filter-btn" data-type="posts">Posts</button>
+        </div>
+        <div class="content-list" id="contentList">
+          <!-- Content will be loaded here dynamically -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

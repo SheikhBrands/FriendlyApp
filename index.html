@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialApp - Connect with Friends</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SocialApp</div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="chat.html">Chat</a>
+      <a href="status.html">Status</a>
+      <a href="posts.html">Posts</a>
+      <div id="authButtons">
+        <a href="login.html" class="btn">Login</a>
+        <a href="login.html?register=true" class="btn secondary">Register</a>
+      </div>
+      <div id="userProfile" style="display: none;">
+        <img id="userProfilePic" src="assets/default-profile.png" alt="Profile">
+        <span id="userName"></span>
+        <button id="signOutBtn" class="btn">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Connect with Friends in Real-Time</h1>
+      <p>Chat, share moments, and grow your audience with our WhatsApp-style social platform</p>
+      <div class="cta-buttons">
+        <a href="login.html" class="btn large">Get Started</a>
+        <a href="#features" class="btn large secondary">Learn More</a>
+      </div>
+    </section>
+
+    <section id="features" class="features-section">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Real-Time Chat</h3>
+          <p>Instant messaging with friends and family with typing indicators and read receipts</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📸</div>
+          <h3>24-Hour Stories</h3>
+          <p>Share photos, videos, and text updates that disappear after a day</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Monetization</h3>
+          <p>Earn money from your content when you reach 10,000 followers</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <h2>About SocialApp</h2>
+      <p>SocialApp combines the best features of WhatsApp and social media to create a unique platform for communication and content sharing. Our mission is to help you stay connected with your loved ones while also providing opportunities to grow your audience.</p>
+      <p>With end-to-end encryption for messages and secure cloud storage for your media, your privacy and security are our top priorities.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="copyright">
+        &copy; 2023 SocialApp. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

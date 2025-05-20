@@ -1,0 +1,72 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat | SocialApp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SocialApp</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="chat.html" class="active">Chat</a>
+      <a href="status.html">Status</a>
+      <a href="posts.html">Posts</a>
+      <div id="userProfile">
+        <img id="userProfilePic" src="assets/default-profile.png" alt="Profile">
+        <span id="userName"></span>
+        <button id="signOutBtn" class="btn">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="chat-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Chats</h2>
+        <button id="newChatBtn" class="icon-btn"><i class="fas fa-plus"></i></button>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search contacts...">
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="users-list" id="usersList">
+        <!-- Users will be loaded here dynamically -->
+      </div>
+    </aside>
+
+    <section class="chat-area">
+      <div class="chat-header" id="chatHeader">
+        <div class="empty-chat">
+          <i class="fas fa-comments"></i>
+          <p>Select a chat to start messaging</p>
+        </div>
+      </div>
+      
+      <div class="messages-container" id="messagesContainer">
+        <!-- Messages will be loaded here dynamically -->
+      </div>
+      
+      <form class="message-form" id="messageForm">
+        <div class="emoji-picker-container">
+          <button type="button" class="icon-btn" id="emojiPickerBtn"><i class="far fa-smile"></i></button>
+        </div>
+        <input type="text" id="messageInput" placeholder="Type a message..." autocomplete="off">
+        <button type="submit" class="icon-btn send-btn"><i class="fas fa-paper-plane"></i></button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/data"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emoji-mart/js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>
