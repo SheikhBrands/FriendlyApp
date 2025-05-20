@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | SocialApp</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">SocialApp</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="chat.html">Chat</a>
+      <a href="status.html">Status</a>
+      <a href="profile.html" class="active">Profile</a>
+      <div id="userProfile">
+        <img id="userProfilePic" src="assets/default-profile.png" alt="Profile">
+        <span id="userName"></span>
+        <button id="signOutBtn" class="btn">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="profile-container">
+    <section class="profile-header">
+      <div class="cover-photo">
+        <div class="edit-cover">
+          <button id="editCoverBtn" class="icon-btn"><i class="fas fa-camera"></i> Edit Cover</button>
+        </div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-picture">
+          <img id="profilePicture" src="assets/default-profile.png" alt="Profile">
+          <button id="editProfilePicBtn" class="icon-btn"><i class="fas fa-camera"></i></button>
+        </div>
+        <div class="profile-details">
+          <h1 id="profileName">Loading...</h1>
+          <p id="profileEmail">user@example.com</p>
+          <div class="profile-stats">
+            <div class="stat">
+              <span id="postCount">0</span>
+              <span>Posts</span>
+            </div>
+            <div class="stat">
+              <span id="followerCount">0</span>
+              <span>Followers</span>
+            </div>
+            <div class="stat">
+              <span id="followingCount">0</span>
+              <span>Following</span>
+            </div>
+          </div>
+          <button id="editProfileBtn" class="btn">Edit Profile</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-content">
+      <nav class="profile-nav">
+        <button class="nav-btn active" data-section="posts">Posts</button>
+        <button class="nav-btn" data-section="statuses">Statuses</button>
+        <button class="nav-btn" data-section="about">About</button>
+        <button class="nav-btn" data-section="friends">Friends</button>
+      </nav>
+
+      <div id="postsSection" class="content-section active">
+        <h2>Your Posts</h2>
+        <div class="posts-grid" id="userPostsGrid">
+          <!-- Posts will be loaded here -->
+          <div class="empty-state">
+            <i class="fas fa-newspaper"></i>
+            <p>No posts yet. Create your first post!</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="statusesSection" class="content-section">
+        <h2>Your Status Updates</h2>
+        <div class="statuses-list" id="userStatusesList">
+          <!-- Statuses will be loaded here -->
+          <div class="empty-state">
+            <i class="fas fa-images"></i>
+            <p>No status updates yet. Share your first status!</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="aboutSection" class="content-section">
+        <h2>About You</h2>
+        <div class="about-info">
+          <div class="info-item">
+            <i class="fas fa-birthday-cake"></i>
+            <div>
+              <h3>Birthday</h3>
+              <p id="birthdayInfo">Not specified</p>
+            </div>
+            <button class="edit-info-btn"><i class="fas fa-pencil-alt"></i></button>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Location</h3>
+              <p id="locationInfo">Not specified</p>
+            </div>
+            <button class="edit-info-btn"><i class="fas fa-pencil-alt"></i></button>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-user-tie"></i>
+            <div>
+              <h3>Occupation</h3>
+              <p id="occupationInfo">Not specified</p>
+            </div>
+            <button class="edit-info-btn"><i class="fas fa-pencil-alt"></i></button>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <h3>Bio</h3>
+              <p id="bioInfo">No bio yet</p>
+            </div>
+            <button class="edit-info-btn"><i class="fas fa-pencil-alt"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="friendsSection" class="content-section">
+        <h2>Your Friends</h2>
+        <div class="friends-grid" id="friendsGrid">
+          <!-- Friends will be loaded here -->
+          <div class="empty-state">
+            <i class="fas fa-user-friends"></i>
+            <p>No friends yet. Start connecting with people!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Profile</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="editProfileForm">
+          <div class="form-group">
+            <label for="editName">Full Name</label>
+            <input type="text" id="editName" required>
+          </div>
+          <div class="form-group">
+            <label for="editBio">Bio</label>
+            <textarea id="editBio" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="editLocation">Location</label>
+            <input type="text" id="editLocation">
+          </div>
+          <div class="form-group">
+            <label for="editOccupation">Occupation</label>
+            <input type="text" id="editOccupation">
+          </div>
+          <div class="form-group">
+            <label for="editBirthday">Birthday</label>
+            <input type="date" id="editBirthday">
+          </div>
+          <button type="submit" class="btn">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/profile.js"></script>
+</body>
+</html>
